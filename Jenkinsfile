@@ -24,7 +24,6 @@ pipeline {
                withCredentials([usernamePassword(credentialsId: 'cf193cec-8eb9-4aee-9e8b-9ab9bcf38c84', passwordVariable: 'docker_passwd', usernameVariable: 'docker_usrname')]) {
     
                     sh """
-		    docker login -u ${docker_usrname} -p ${docker_passwd}
                     cd Webserver-1
                     docker build -t ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER} .
                     docker push ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER}
