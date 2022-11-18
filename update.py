@@ -11,7 +11,7 @@ def read_data():
     yaml = YAML()
     yaml.preserve_quotes = True
     yaml.default_flow_style=None
-    with open(inp, "r") as yaml_file:
+    with open(str(inp), "r") as yaml_file:
         values_yml = yaml.load(yaml_file)  
     return values_yml 
 
@@ -36,6 +36,7 @@ if __name__ == '__main__':
     image_name = sys.argv[1] 
     repo = "https://github.com/arif11111/Webserver-hosting.git"
     values_json = read_data()
+    print(values_json)
     update_values(values_json)
-    commit_to_git(new_branch)
+    commit_to_git()
 
