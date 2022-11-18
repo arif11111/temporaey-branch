@@ -6,7 +6,7 @@ replicaCount: 2
 
 deployment:
   name: deploy
-  image: a5edevopstuts/nginx-web-server-2:v3
+  image: a5edevopstuts/nginx-web-server-2:v4
   port: 80
 
 imagePullSecrets: []
