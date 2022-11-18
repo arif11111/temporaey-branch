@@ -26,7 +26,7 @@ pipeline {
                     sh """
                     cd Webserver-1
                     docker build -t ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER} .
-		    docker login -u ${docker_usrname} -p ${docker_passwd}
+		    docker login -u $\{docker_usrname\} -p $\{docker_passwd\}
                     docker push ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER}
                     WEBSERVER1_DOCKER_ID=${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER}
         
