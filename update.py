@@ -21,7 +21,7 @@ def update_values(values_json):
     yaml = YAML()
     yaml.indent(sequence=4, offset=2)
     yaml.default_flow_style=None
-    with open('values.yaml', 'w') as file:
+    with open(str('{}/helm/values.yaml'.format(dir_name)), 'w') as file:
         yaml.dump(values_json, file)
 
 
