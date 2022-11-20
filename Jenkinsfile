@@ -44,17 +44,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Update docker image') {
-            agent { docker { image 'python:3.7.2' } } 
-            steps {
-                sh """
-                pip install pathlib
-                pip install ruamel.yaml
-                python ../update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
-                python ../update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
-                """
-            }
-        }
    }
 }
