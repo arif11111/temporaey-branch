@@ -1,6 +1,4 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include .Values.service.port . -}}
-{{- $svcPort := .Values.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -15,9 +13,9 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ .Release.Name }}
   labels:
-    {{- include "eproc-sd.labels" . | nindent 4 }}
+    {{- include "web-server-1.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -40,12 +38,12 @@ spec:
   - http:
       {{- range .Values.ingress.paths }}
       paths:
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
-            backend:
-              service:
-                name: {{ $.Release.Name }}
-                port:
-                  number: 80
-      {{- end }}            
+      - path: {{ .path }}
+        pathType: {{ .pathType }}
+        backend:
+          service:
+            name: {{ $.Release.Name }}-svc
+            port:
+              number: 80
+      {{- end }}
 {{- end }}

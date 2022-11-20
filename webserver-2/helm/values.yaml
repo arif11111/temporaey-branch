@@ -6,7 +6,7 @@ replicaCount: 2
 
 deployment:
   name: deploy
-  image: a5edevopstuts/nginx-web-server-2:v4
+  image: a5edevopstuts/webserver-2:25
   port: 80
 
 imagePullSecrets: []
@@ -48,7 +48,7 @@ ingress:
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  ingressClassName: nginx
+  className: nginx
   paths:
     - path: /stats-2
       pathType: Prefix
@@ -74,7 +74,8 @@ autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 40
+  name: hpa  
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
