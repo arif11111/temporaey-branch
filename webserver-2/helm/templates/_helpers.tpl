@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "web-server-1.name" -}}
+{{- define "web-server-2.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "web-server-1.fullname" -}}
+{{- define "web-server-2.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "web-server-1.chart" -}}
+{{- define "web-server-2.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "web-server-1.labels" -}}
-helm.sh/chart: {{ include "web-server-1.chart" . }}
-{{ include "web-server-1.selectorLabels" . }}
+{{- define "web-server-2.labels" -}}
+helm.sh/chart: {{ include "web-server-2.chart" . }}
+{{ include "web-server-2.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "web-server-1.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "web-server-1.name" . }}
+{{- define "web-server-2.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "web-server-2.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "web-server-1.serviceAccountName" -}}
+{{- define "web-server-2.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "web-server-1.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "web-server-2.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
