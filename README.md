@@ -90,7 +90,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 ```
 
 <h3> Kubernetes Application Resources </h3>
-THe webserver application workload consists of the following  kubernetes objects - 
+THe webserver application workload consists of the following  kubernetes objects - </br>
 1. Deployment</br>
 2. Service</br>
 3. Ingress Resource</br>
