@@ -1,4 +1,4 @@
-# Webserver-hosting
+# Static Web Pages Application Hosting
 
 This project features a static webpages application deployed as workloads on AWS Managed EKS cluster.
 The static web application consists of two web pages hosted on its particular nginx webserver which is authenticated through users credentials.
@@ -58,7 +58,7 @@ Executing the command will prompt the kubeconfig file to be loaded within your h
 ```
 aws eks --region us-west-2 update-kubeconfig --name my-cluster
 ```
-<h3> Nginx Webserver COnfiguration </h3> 
+<h2> Nginx Webserver COnfiguration </h2> 
 The nginx configuration consists of a basic method to host the static page on default server on port 80.
 
 <h2> Jenkins CI/CD for creating webservers docker image </h2> 
