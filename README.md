@@ -75,8 +75,13 @@ Before begining with the applicaton  deployments, there are some pre-requisites 
 **[Nginx-Ingress]** - To allow path base routing to our web pages. </br>
 ```https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml``` </br>
 
+<img width="943" alt="ingress-nginx" src="https://user-images.githubusercontent.com/33144027/203225933-c28aee31-33ba-4332-8537-c8650b62ed09.PNG">
+The ingress controller service will be assigned a AWS Load Balancer automatically which will be our Hostname to route to our webservers static pages.
+
 **[Metrics-Server]** - To monitor the metrics on the application workload for load testing. </br>
 ```kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml``` </br>
+<img width="658" alt="metrics-endpoint" src="https://user-images.githubusercontent.com/33144027/203225806-a796aac3-fa3b-4b7f-90ae-2cc87aca8f66.PNG">
+This verifies that metrics API is running properly within our cluster.
 
 **[ArgoCD]** - For Automated Deployment of manifests/helm chart in Kubernetes Cluster. </br>
 ```
@@ -95,6 +100,13 @@ Also, to make our web pages user authenticated we make use of secrets to pass th
 ```
 kubectl create secret generic basic-auth --from-file=auth
 ```
+where the auth file contains password created from htpassword module. </br>
+<img width="374" alt="secret" src="https://user-images.githubusercontent.com/33144027/203225730-1d27832e-2101-42de-ad65-903e347ff72e.PNG">
+
+and that secret will be used within annotations in our ingress resource to allow the webservers to be authenticated.
+
+
+
 
 
 
