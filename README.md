@@ -91,10 +91,10 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 <h3> Kubernetes Application Resources </h3>
 THe webserver application workload consists of the following  kubernetes objects - 
-1. Deployment
-2. Service
-3. Ingress Resource
-4. Horizontal Pod Autoscaler
+1. Deployment</br>
+2. Service</br>
+3. Ingress Resource</br>
+4. Horizontal Pod Autoscaler</br>
 
 Also, to make our web pages user authenticated we make use of secrets to pass those credentials within our ingress resources - 
 ```
@@ -102,8 +102,19 @@ kubectl create secret generic basic-auth --from-file=auth
 ```
 where the auth file contains password created from htpassword module. </br>
 <img width="374" alt="secret" src="https://user-images.githubusercontent.com/33144027/203225730-1d27832e-2101-42de-ad65-903e347ff72e.PNG">
-
 and that secret will be used within annotations in our ingress resource to allow the webservers to be authenticated.
+
+Our current repository is confugured within argocd and then the two webservers directory path is mentioned within the ArgoCD applications creation which initiates in the deployment of our applications resources within the cluster
+**[Webserver-1 Application Workloads]** -
+
+<img width="776" alt="web-server-1-argocd" src="https://user-images.githubusercontent.com/33144027/203227414-9f9fab2c-7d65-43ce-9702-5180edd36f3c.PNG">
+<img width="857" alt="web-server-1 workloads" src="https://user-images.githubusercontent.com/33144027/203227448-8e1e50b1-c22d-476d-bc9f-713f80ff11eb.PNG">
+
+**[Webserver-2 Application Workloads]** -
+
+<img width="772" alt="web-server-2-argocd" src="https://user-images.githubusercontent.com/33144027/203227700-589a581c-8ed9-435e-80da-782a60997940.PNG">
+<img width="832" alt="web-server-2 workloads" src="https://user-images.githubusercontent.com/33144027/203227708-7288b63c-19a7-4fa9-9fdf-021869dd26e7.PNG">
+
 
 
 
