@@ -35,7 +35,7 @@ def commit_to_git():
 if __name__ == '__main__':
     image_name = sys.argv[1]
     dir_name = sys.argv[2]
-    repo = "https://github.com/arif11111/Webserver-hosting.git"
+    repo = "https://github.com/arif11111/temporaey-branch.git"
     values_json = read_data(dir_name)
     print(values_json)
     update_values(values_json)
