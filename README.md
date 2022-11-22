@@ -58,7 +58,7 @@ Executing the command will prompt the kubeconfig file to be loaded within your h
 ```
 aws eks --region us-west-2 update-kubeconfig --name my-cluster
 ```
-<h2> Nginx Webserver COnfiguration </h2> 
+<h2> Nginx Webserver Configuration </h2> 
 The nginx configuration consists of a basic method to host the static page on default server on port 80.
 
 <h2> Jenkins CI/CD for creating webservers docker image </h2> 
