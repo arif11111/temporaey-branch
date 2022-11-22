@@ -131,7 +131,7 @@ Final Results -
 <img width="645" alt="Page-1" src="https://user-images.githubusercontent.com/33144027/203232752-ac1a11c1-03cc-45d6-ac54-7cddc79631a8.PNG">
 <img width="662" alt="Page-2" src="https://user-images.githubusercontent.com/33144027/203232777-df5f397c-3435-4264-bbe1-b64bf7fa6b50.PNG">
 
-**[Load Testing]** - As a way to measure of how our webserver reacts in accordance to the traffic load occurs, we can make use of Horizontal Pod autoscaler with metrics pointing to the CPU utilization and will generate a new replica pod as soon as the threshold will reached.
+**Load Testing** - As a way to measure of how our webserver reacts in accordance to the traffic load occurs, we can make use of Horizontal Pod autoscaler with metrics pointing to the CPU utilization and will generate a new replica pod as soon as the threshold will reached.
 
 ```kubectl apply -f load-testing-deployment.yaml``` </br>
 This deployment will generate a traffic to the application pods by continuously accessing the page of the application.
@@ -149,7 +149,7 @@ As soon as the load threshold increases, we see the new replica gets created to 
 
 <h2> Webserver Hosting as Workload Approach Insights </h2>
 
-**[The current approach involves]**: 
+**The current approach involves**: 
 - creating a docker image particularly for each web server with its hosting index page. This helps us in maintiaing the code template which can be shipped into different environments Machines with different configurations as our Image will be running in isolated environment
 - Creating Helm Chart for each webserver and its docker image id getting updated with the latest image id with python script and that can be automated with a CI tool (Jenkins). Due to this, the Image creation instance is always unique and the same created image is been deployed into cluster without any human intervention to deploy the latest config.
 - Creation of EKS Cluster and its corresponding AWS resources involved with an IAC tool - Terraform. Provisioning Infra with a IAC tool helps in managing the resources in bunch of code due to which it can be extensible, re-writable and re-usable in creating mutliple setups of the same structure.
