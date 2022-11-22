@@ -63,14 +63,15 @@ The nginx configuration consists of a basic method to host the static page on de
 
 <h2> Jenkins CI/CD for creating webservers docker image </h2> 
 
-The Jenkins file will clone the repo and create docker images with the version being the Job Build instance ```${DOCKER_REG}/${IMAGE_NAME}:${BUILD_NUMBER}``` and will publish into the docker hub repo and will update the job instance build image name into values.yaml helm chart.
+The Jenkins file will clone the repo and create docker images with the version being the Job Build instance ```${DOCKER_REG}/${IMAGE_NAME}:${BUILD_NUMBER}``` and will publish into the docker hub repo and will update the job instance build image name into values.yaml helm chart through python script.</br>
+```python upload.py <IMAGE-ID> <webserver-directory>```
 
 <img width="317" alt="Jenkins-image-creation-1" src="https://user-images.githubusercontent.com/33144027/203221915-92a91c50-9a99-4d81-a8df-933ef27de2a7.PNG">
 <img width="382" alt="Jenkins-image-creation-2" src="https://user-images.githubusercontent.com/33144027/203222292-6440ef8f-b71d-4d41-bf24-1b8bbfec0afa.PNG">
 
 <h2> Installation in Kubernetes cluster </h2>
 
-Before begining with the applicaton  deployments, there are some pre-requisites to be installed within the deployment.
+Before begining with the applicaton deployments, there are some pre-requisites to be installed within the deployment.
 
 **Nginx-Ingress** - To allow path base routing to our web pages. </br>
 ```https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml``` </br>
@@ -107,6 +108,9 @@ where the auth file contains password created from htpassword module and that se
 <h2> Application resource deployments in Kubernetes cluster </h2>
 
 Our current repository is configured within argocd and then the two webservers directory path ```webserver-1/helm``` and ```webserver-2/helm``` is mentioned within the ArgoCD applications creation which initiates in the deployment of our applications resources within the cluster. </br>
+Following screenshots illustrates the Kubernetes resources deployed for both webservers applications.  </br>
+
+
 **Webserver-1 Application Workloads** -
 
 <img width="776" alt="web-server-1-argocd" src="https://user-images.githubusercontent.com/33144027/203227414-9f9fab2c-7d65-43ce-9702-5180edd36f3c.PNG">
@@ -150,20 +154,11 @@ As soon as the load threshold increases, we see the new replica gets created to 
 <h2> Webserver Hosting as Workload Approach Insights </h2>
 
 **The current approach involves**: 
-- creating a docker image particularly for each web server with its hosting index page. This helps us in maintiaing the code template which can be shipped into different environments Machines with different configurations as our Image will be running in isolated environment
+- Creating a docker image particularly for each web server with its hosting index page. This helps us in maintiaing the code template which can be shipped into different environments Machines with different configurations as our Image will be running in isolated environment
 - Creating Helm Chart for each webserver and its docker image id getting updated with the latest image id with python script and that can be automated with a CI tool (Jenkins). Due to this, the Image creation instance is always unique and the same created image is been deployed into cluster without any human intervention to deploy the latest config.
 - Creation of EKS Cluster and its corresponding AWS resources involved with an IAC tool - Terraform. Provisioning Infra with a IAC tool helps in managing the resources in bunch of code due to which it can be extensible, re-writable and re-usable in creating mutliple setups of the same structure.
 - The static page docker images are then deployed as workload in kubernetes cluster in multi-replicas mode. Deploying our workloads into multiple pods allows to have Highly - available/scalable architecture. 
 - Usage of ArgoCD for deploying the helm charts onto kubernetes cluster with GitOps principles so that every image is automatically reflected in the cluster. GItOps principles helps in maintaining the state of our cluster according to our requirements and compatibility.
 - The Deployments are then accessible through ingress path routing method with authentication enabled using secrets. Ingress in a K8s Cluster allows to make use of Load balancing the request which helps in processing the traffic request faster and easier. Also, authentication can also be managed either using Credentials or SSL/TLS encryption of the website needed.
 - Load Testing involves Horizontal Pod Autoscaler which can scale the no of application workloads according to our requirement till the traffic is under threshold. 
-
-
-
-
-
-
-
-
-
 
