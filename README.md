@@ -16,7 +16,7 @@ Tools been utilized for the process - </br>
 
 **[Helm Charts]** - This bascially bundles or package up the resource needed for building up the application. It also basically links the kubernetes objects which has been deployed for the kubernetes cluster.</br>
 
-**[ArgoCD}** - A tool for automating helm charts deployment on K8s cluster.
+**[ArgoCD]** - A tool for automating helm charts deployment on K8s cluster.
 
 <h3> Creating AWS VPC and EKS cluster </h3>
 
@@ -72,18 +72,18 @@ The Jenkins file will clone the repo and create docker images with the version b
 
 Before begining with the applicaton  deployments, there are some pre-requisites to be installed within the deployment.
 
-**[Nginx-Ingress]** - To allow path base routing to our web pages. </br>
+**Nginx-Ingress** - To allow path base routing to our web pages. </br>
 ```https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml``` </br>
 
 <img width="943" alt="ingress-nginx" src="https://user-images.githubusercontent.com/33144027/203225933-c28aee31-33ba-4332-8537-c8650b62ed09.PNG"> </br>
 The ingress controller service will be assigned a AWS Load Balancer automatically which will be our Hostname to route to our webservers static pages.
 
-**[Metrics-Server]** - To monitor the metrics on the application workload for load testing. </br>
+**Metrics-Server** - To monitor the metrics on the application workload for load testing. </br>
 ```kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml``` </br>
 <img width="658" alt="metrics-endpoint" src="https://user-images.githubusercontent.com/33144027/203225806-a796aac3-fa3b-4b7f-90ae-2cc87aca8f66.PNG"> </br>
 This verifies that metrics API is running properly within our cluster.
 
-**[ArgoCD]** - For Automated Deployment of manifests/helm chart in Kubernetes Cluster. </br>
+**ArgoCD** - For Automated Deployment of manifests/helm chart in Kubernetes Cluster. </br>
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -107,20 +107,20 @@ where the auth file contains password created from htpassword module and that se
 <h2> Application resource deployments in Kubernetes cluster </h2>
 
 Our current repository is confugured within argocd and then the two webservers directory path ```webserver-1/helm``` and ```webserver-2/helm``` is mentioned within the ArgoCD applications creation which initiates in the deployment of our applications resources within the cluster. </br>
-**[Webserver-1 Application Workloads]** -
+**Webserver-1 Application Workloads** -
 
 <img width="776" alt="web-server-1-argocd" src="https://user-images.githubusercontent.com/33144027/203227414-9f9fab2c-7d65-43ce-9702-5180edd36f3c.PNG">
 
 <img width="857" alt="web-server-1 workloads" src="https://user-images.githubusercontent.com/33144027/203227448-8e1e50b1-c22d-476d-bc9f-713f80ff11eb.PNG"> </br>
 
-**[Webserver-2 Application Workloads]** -
+**Webserver-2 Application Workloads** -
 
 <img width="772" alt="web-server-2-argocd" src="https://user-images.githubusercontent.com/33144027/203227700-589a581c-8ed9-435e-80da-782a60997940.PNG">
 
 <img width="832" alt="web-server-2 workloads" src="https://user-images.githubusercontent.com/33144027/203227708-7288b63c-19a7-4fa9-9fdf-021869dd26e7.PNG"> </br>
 
 
-**[Ingress Resource]** - This consists of the ingress path base routing to different web pages with secrets configured within the annotation.</br>
+**Ingress Resource** - This consists of the ingress path base routing to different web pages with secrets configured within the annotation.</br>
 <img width="711" alt="webserver-ingress" src="https://user-images.githubusercontent.com/33144027/203232170-a02ca178-e91f-475a-8f63-f9751dfc9920.PNG">
 
 where ```<dns-hostname>/stats-1``` route to the first page whereas ```<dns-hostname>/stats-2``` route to the second page of the application.
