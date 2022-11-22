@@ -110,12 +110,28 @@ Our current repository is confugured within argocd and then the two webservers d
 **[Webserver-1 Application Workloads]** -
 
 <img width="776" alt="web-server-1-argocd" src="https://user-images.githubusercontent.com/33144027/203227414-9f9fab2c-7d65-43ce-9702-5180edd36f3c.PNG">
+
 <img width="857" alt="web-server-1 workloads" src="https://user-images.githubusercontent.com/33144027/203227448-8e1e50b1-c22d-476d-bc9f-713f80ff11eb.PNG"> </br>
 
 **[Webserver-2 Application Workloads]** -
 
 <img width="772" alt="web-server-2-argocd" src="https://user-images.githubusercontent.com/33144027/203227700-589a581c-8ed9-435e-80da-782a60997940.PNG">
-<img width="832" alt="web-server-2 workloads" src="https://user-images.githubusercontent.com/33144027/203227708-7288b63c-19a7-4fa9-9fdf-021869dd26e7.PNG">
+
+<img width="832" alt="web-server-2 workloads" src="https://user-images.githubusercontent.com/33144027/203227708-7288b63c-19a7-4fa9-9fdf-021869dd26e7.PNG"> </br>
+
+
+**[Ingress Resource]** - This consists of the ingress path base routing to different web pages with secrets configured within the annotation.</br>
+<img width="711" alt="webserver-ingress" src="https://user-images.githubusercontent.com/33144027/203232170-a02ca178-e91f-475a-8f63-f9751dfc9920.PNG">
+
+where ```<dns-hostname>/stats-1``` route to the first page whereas ```<dns-hostname>/stats-2``` route to the second page of the application.
+
+Final Results - 
+
+<img width="623" alt="Page-1-auth" src="https://user-images.githubusercontent.com/33144027/203232703-6c0c5c10-242b-4be9-ad8e-f5f2739398d6.PNG">
+<img width="645" alt="Page-1" src="https://user-images.githubusercontent.com/33144027/203232752-ac1a11c1-03cc-45d6-ac54-7cddc79631a8.PNG">
+<img width="662" alt="Page-2" src="https://user-images.githubusercontent.com/33144027/203232777-df5f397c-3435-4264-bbe1-b64bf7fa6b50.PNG">
+
+
 
 
 
