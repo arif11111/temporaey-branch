@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
         environment {
-	    DOCKER_REG = 'a5edevopstuts' 
+	DOCKER_REG = 'a5edevopstuts' 
         IMAGE_NAME_1 = 'webserver-1' 
         IMAGE_NAME_2 = 'webserver-2' 
         DOCKER_ID = "${DOCKER_REG}/${IMAGE_NAME}"  // container ID for running the docker image locally    
@@ -33,22 +33,15 @@ pipeline {
                     cd ../webserver-2
                     docker build -t ${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER} .
                     docker push ${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER}
-                    WEBSERVER2_DOCKER_ID=${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER}		    
-		            """
+                    WEBSERVER2_DOCKER_ID=${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER}
+		    
+		     cd ..
+		     python update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
+		     python update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
+		     """
         
                 }
             }
         }
-
-        stage('Update Docker iamge in values.yaml') {
-        	agent any
-            steps {    
-                    sh """
-                    pwd
-                    python update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
-		    python update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
-		    """       
-            }
-        }        
    }
 }
