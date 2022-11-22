@@ -44,10 +44,10 @@ pipeline {
         	agent any
             steps {    
                     sh """
-		            cd ..
-		            python update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
-		            python update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
-		            """       
+                    pwd
+                    python update.py ${WEBSERVER1_DOCKER_ID} ${IMAGE_NAME_1}
+		    python update.py ${WEBSERVER2_DOCKER_ID} ${IMAGE_NAME_2}
+		    """       
             }
         }        
    }
