@@ -133,7 +133,7 @@ Final Results -
 
 **[Load Testing]** - As a way to measure of how our webserver reacts in accordance to the traffic load occurs, we can make use of Horizontal Pod autoscaler with metrics pointing to the CPU utilization and will generate a new replica pod as soon as the threshold will reached.
 
-``kubectl apply -f load-testing-deployment.yaml``` </br>
+```kubectl apply -f load-testing-deployment.yaml``` </br>
 This deployment will generate a traffic to the application pods by continuously accessing the page of the application.
 
 The traffic load can be measured by viewing the pod autoscaler in the cluster.
