@@ -131,6 +131,21 @@ Final Results -
 <img width="645" alt="Page-1" src="https://user-images.githubusercontent.com/33144027/203232752-ac1a11c1-03cc-45d6-ac54-7cddc79631a8.PNG">
 <img width="662" alt="Page-2" src="https://user-images.githubusercontent.com/33144027/203232777-df5f397c-3435-4264-bbe1-b64bf7fa6b50.PNG">
 
+**[Load Testing]** - As a way to measure of how our webserver reacts in accordance to the traffic load occurs, we can make use of Horizontal Pod autoscaler with metrics pointing to the CPU utilization and will generate a new replica pod as soon as the threshold will reached.
+
+``kubectl apply -f load-testing-deployment.yaml``` </br>
+This deployment will generate a traffic to the application pods by continuously accessing the page of the application.
+
+The traffic load can be measured by viewing the pod autoscaler in the cluster.
+<img width="712" alt="hpa-w" src="https://user-images.githubusercontent.com/33144027/203240123-3c8b6c2a-6598-4c91-b323-3129f6ba89b3.PNG"></br>
+
+As soon as the load threshold increases, we see the new replica gets created to match the max no. of pods replica.
+<img width="522" alt="autoscale-web-server-1" src="https://user-images.githubusercontent.com/33144027/203240284-b641d949-06bc-4262-a2ea-f119e251b91e.PNG">
+
+<img width="629" alt="autoscale-web-server-2" src="https://user-images.githubusercontent.com/33144027/203240293-2ff8bf30-095a-4887-a105-4eed3a6f4707.PNG">
+
+
+
 
 
 
