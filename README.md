@@ -106,7 +106,7 @@ where the auth file contains password created from htpassword module and that se
 
 <h2> Application resource deployments in Kubernetes cluster </h2>
 
-Our current repository is confugured within argocd and then the two webservers directory path is mentioned within the ArgoCD applications creation which initiates in the deployment of our applications resources within the cluster. </br>
+Our current repository is confugured within argocd and then the two webservers directory path ```webserver-1/helm``` and ```webserver-2/helm``` is mentioned within the ArgoCD applications creation which initiates in the deployment of our applications resources within the cluster. </br>
 **[Webserver-1 Application Workloads]** -
 
 <img width="776" alt="web-server-1-argocd" src="https://user-images.githubusercontent.com/33144027/203227414-9f9fab2c-7d65-43ce-9702-5180edd36f3c.PNG">
