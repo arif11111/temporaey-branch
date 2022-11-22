@@ -147,7 +147,16 @@ As soon as the load threshold increases, we see the new replica gets created to 
 
 
 
+<h2> Webserver Hosting as Workload Approach Insights </h2>
 
+**[The current approach involves]**: 
+- creating a docker image particularly for each web server with its hosting index page. This helps us in maintiaing the code template which can be shipped into different environments Machines with different configurations as our Image will be running in isolated environment
+- Creating Helm Chart for each webserver and its docker image id getting updated with the latest image id with python script and that can be automated with a CI tool (Jenkins). Due to this, the Image creation instance is always unique and the same created image is been deployed into cluster without any human intervention to deploy the latest config.
+- Creation of EKS Cluster and its corresponding AWS resources involved with an IAC tool - Terraform. Provisioning Infra with a IAC tool helps in managing the resources in bunch of code due to which it can be extensible, re-writable and re-usable in creating mutliple setups of the same structure.
+- The static page docker images are then deployed as workload in kubernetes cluster in multi-replicas mode. Deploying our workloads into multiple pods allows to have Highly - available/scalable architecture. 
+- Usage of ArgoCD for deploying the helm charts onto kubernetes cluster with GitOps principles so that every image is automatically reflected in the cluster. GItOps principles helps in maintaining the state of our cluster according to our requirements and compatibility.
+- The Deployments are then accessible through ingress path routing method with authentication enabled using secrets. Ingress in a K8s Cluster allows to make use of Load balancing the request which helps in processing the traffic request faster and easier. Also, authentication can also be managed either using Credentials or SSL/TLS encryption of the website needed.
+- Load Testing involves Horizontal Pod Autoscaler which can scale the no of application workloads according to our requirement till the traffic is under threshold. 
 
 
 
