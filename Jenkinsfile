@@ -24,11 +24,20 @@ pipeline {
                withCredentials([usernamePassword(credentialsId: 'cf193cec-8eb9-4aee-9e8b-9ab9bcf38c84', passwordVariable: 'docker_passwd', usernameVariable: 'docker_usrname')]) {
     
                     sh """
-		     python3 --version
-		     pip install pathlib
-		     pip install ruamel.yaml
-		     python ../update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
-		     python ../update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
+                    docker login -u "${docker_usrname}" -p "${docker_passwd}"
+                    cd webserver-1
+                    docker build -t ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER} .		            
+                    docker push ${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER}
+                    WEBSERVER1_DOCKER_ID=${DOCKER_REG}/${IMAGE_NAME_1}:${BUILD_NUMBER}
+        
+                    cd ../webserver-2
+                    docker build -t ${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER} .
+                    docker push ${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER}
+                    WEBSERVER2_DOCKER_ID=${DOCKER_REG}/${IMAGE_NAME_2}:${BUILD_NUMBER}
+		    
+		     cd ..
+		     python update.py \$WEBSERVER1_DOCKER_ID ${IMAGE_NAME_1}
+		     python update.py \$WEBSERVER2_DOCKER_ID ${IMAGE_NAME_2}
 		     """
         
                 }
